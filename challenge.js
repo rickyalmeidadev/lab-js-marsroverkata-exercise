@@ -191,7 +191,7 @@ function moveForward(rover, otherRover) {
       rover.x--;
       break;
   }
-  newPosition = { x: rover.x, y: rover.y };
+  let newPosition = { x: rover.x, y: rover.y };
   rover.travelLog.push(newPosition);
   console.log("moveForward was called");
 }
@@ -214,7 +214,7 @@ function moveBackward(rover, otherRover) {
       rover.x++;
       break;
   }
-  newPosition = { x: rover.x, y: rover.y };
+  let newPosition = { x: rover.x, y: rover.y };
   rover.travelLog.push(newPosition);
   console.log("moveBackward was called");
 }
@@ -250,7 +250,7 @@ function command(rover, otherRover, orders) {
 // First rover
 // ================================
 console.log("Kata calls:")
-command(marsRoverKata, marsRoverAlt, ""); // <= Commands go here
+command(marsRoverKata, marsRoverAlt, "rffrfflfrff"); // <= Commands go here
 console.log("Kata travel log:");
 console.log(marsRoverKata.travelLog);
 
