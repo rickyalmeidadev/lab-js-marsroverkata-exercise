@@ -1,5 +1,5 @@
 // Rover object
-// ======================
+// ================================
 let marsRoverKata = {
   direction: "E",
   x: 0,
@@ -15,7 +15,7 @@ let marsRoverAlt = {
 };
 
 // Grid
-// ====
+// ================================
 
 let board = [
   ["", "", "", "", "", "", "X", "", "", ""],
@@ -31,7 +31,7 @@ let board = [
 ];
 
 // Turn sides
-// ==========
+// ================================
 
 function turnLeft(rover) {
   switch (rover.direction) {
@@ -70,7 +70,7 @@ function turnRight(rover) {
 }
 
 // Obstacle checking
-// =================
+// ================================
 
 function checkObstacleFoward(rover) {
   if (
@@ -167,7 +167,7 @@ function checkInvalidBackwardMovement(rover) {
 }
 
 // Movements
-// =========
+// ================================
 
 function moveForward(rover, otherRover) {
   if (
@@ -220,7 +220,7 @@ function moveBackward(rover, otherRover) {
 }
 
 // Commands checking
-// =================
+// ================================
 
 function command(rover, otherRover, orders) {
   for (let i = 0; i < orders.length; i++) {
@@ -245,19 +245,19 @@ function command(rover, otherRover, orders) {
 }
 
 // Commands section
-// ================
+// ================================
 
 // First rover
-// ===========
+// ================================
 console.log("Kata calls:")
-command(marsRoverKata, marsRoverAlt, ""); // <= Commands goes here
+command(marsRoverKata, marsRoverAlt, ""); // <= Commands go here
 console.log("Kata travel log:");
 console.log(marsRoverKata.travelLog);
 
 
 // Second rover
-// ============
+// ================================
 console.log("Alt calls:")
-command(marsRoverAlt, marsRoverKata, ""); // <= Commands goes here
+command(marsRoverAlt, marsRoverKata, ""); // <= Commands go here
 console.log("Alt travel log:");
 console.log(marsRoverAlt.travelLog);
