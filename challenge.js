@@ -1,14 +1,14 @@
 // Rover object
 // ================================
 let marsRoverKata = {
-  direction: "E",
+  direction: "N",
   x: 0,
   y: 0,
   travelLog: [{ x: 0, y: 0 }]
 };
 
 let marsRoverAlt = {
-  direction: "W",
+  direction: "S",
   x: 9,
   y: 9,
   travelLog: [{ x: 9, y: 9 }]
@@ -17,23 +17,24 @@ let marsRoverAlt = {
 // Grid
 // ================================
 
-let board = [
-  ["", "", "", "", "", "", "X", "", "", ""],
-  ["", "", "", "X", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", "", "", "X", ""],
-  ["", "", "X", "", "", "", "", "", "", ""],
-  ["", "", "", "", "", "X", "", "", "", ""],
-  ["", "", "", "", "", "", "", "X", "", ""],
-  ["", "", "", "", "X", "", "", "", "", ""],
-  ["", "", "X", "", "", "", "", "", "", ""],
-  ["X", "", "", "", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", "X", "", "", ""]
-];
+let board = [];
+for (let i = 0; i < 10; i++) {
+  board.push([]);
+  for (let j = 0; j < 10; j++) {
+    board[i].push("");
+  }
+}
+for (let i = 0; i < 10; i++) {
+  board[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 10)] = "X";
+}
+board[0][0] = "";
+board[9][9] = "";
+console.table(board);
 
 // Turn sides
 // ================================
 
-let turnLeft = (rover) => {
+let turnLeft = rover => {
   switch (rover.direction) {
     case "N":
       rover.direction = "W";
@@ -49,9 +50,9 @@ let turnLeft = (rover) => {
       break;
   }
   console.log("turnLeft was called");
-}
+};
 
-let turnRight = (rover) => {
+let turnRight = rover => {
   switch (rover.direction) {
     case "N":
       rover.direction = "E";
@@ -67,12 +68,12 @@ let turnRight = (rover) => {
       break;
   }
   console.log("turnRight was called");
-}
+};
 
 // Obstacle checking
 // ================================
 
-let checkObstacleFoward = (rover) => {
+let checkObstacleFoward = rover => {
   if (
     (rover.direction === "N" && board[rover.y - 1][rover.x] === "X") ||
     (rover.direction === "E" && board[rover.y][rover.x + 1] === "X") ||
@@ -82,9 +83,9 @@ let checkObstacleFoward = (rover) => {
     console.log("There is an obstacle in the way!");
     return true;
   }
-}
+};
 
-let checkObstacleBackward = (rover) => {
+let checkObstacleBackward = rover => {
   if (
     (rover.direction === "N" && board[rover.y + 1][rover.x] === "X") ||
     (rover.direction === "E" && board[rover.y][rover.x - 1] === "X") ||
@@ -94,7 +95,7 @@ let checkObstacleBackward = (rover) => {
     console.log("There is an obstacle in the way!");
     return true;
   }
-}
+};
 
 // Other rover in the way checking
 // ================================
@@ -117,7 +118,7 @@ let checkOtherRoverInFront = (rover, otherRover) => {
     console.log("There is another rover in the way!");
     return true;
   }
-}
+};
 
 let checkOtherRoverBehind = (rover, otherRover) => {
   if (
@@ -137,7 +138,7 @@ let checkOtherRoverBehind = (rover, otherRover) => {
     console.log("There is another rover in the way!");
     return true;
   }
-}
+};
 
 // Movements to outside the board checking
 // =======================================
@@ -152,9 +153,9 @@ let checkInvalidForwardMovement = rover => {
     console.log("You can't place rover outside of the board!");
     return true;
   }
-}
+};
 
-let checkInvalidBackwardMovement = (rover) => {
+let checkInvalidBackwardMovement = rover => {
   if (
     (rover.x === 0 && rover.direction === "E") ||
     (rover.x === 9 && rover.direction === "W") ||
@@ -164,7 +165,7 @@ let checkInvalidBackwardMovement = (rover) => {
     console.log("You can't place rover outside of the board!");
     return true;
   }
-}
+};
 
 // Movements
 // ================================
@@ -194,10 +195,14 @@ let moveForward = (rover, otherRover) => {
   let newPosition = { x: rover.x, y: rover.y };
   rover.travelLog.push(newPosition);
   console.log("moveForward was called");
-}
+};
 
 let moveBackward = (rover, otherRover) => {
-  if (checkInvalidBackwardMovement(rover) || checkObstacleBackward(rover) || checkOtherRoverBehind(rover, otherRover)) {
+  if (
+    checkInvalidBackwardMovement(rover) ||
+    checkObstacleBackward(rover) ||
+    checkOtherRoverBehind(rover, otherRover)
+  ) {
     return;
   }
   switch (rover.direction) {
@@ -217,7 +222,7 @@ let moveBackward = (rover, otherRover) => {
   let newPosition = { x: rover.x, y: rover.y };
   rover.travelLog.push(newPosition);
   console.log("moveBackward was called");
-}
+};
 
 // Commands checking
 // ================================
@@ -242,22 +247,20 @@ let command = (rover, otherRover, orders) => {
         break;
     }
   }
-}
+};
 
 // Commands section
 // ================================
 
 // First rover
 // ================================
-console.log("Kata calls:")
+console.log("Kata calls:");
 command(marsRoverKata, marsRoverAlt, "rffrfflfrff"); // <= Commands go here
 console.log("Kata travel log:");
 console.log(marsRoverKata.travelLog);
-
-
 // Second rover
 // ================================
-console.log("Alt calls:")
-command(marsRoverAlt, marsRoverKata, ""); // <= Commands go here
+console.log("Alt calls:");
+command(marsRoverAlt, marsRoverKata, "rffrfflfrff"); // <= Commands go here
 console.log("Alt travel log:");
 console.log(marsRoverAlt.travelLog);
