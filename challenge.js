@@ -33,7 +33,7 @@ let board = [
 // Turn sides
 // ================================
 
-function turnLeft(rover) {
+let turnLeft = (rover) => {
   switch (rover.direction) {
     case "N":
       rover.direction = "W";
@@ -51,7 +51,7 @@ function turnLeft(rover) {
   console.log("turnLeft was called");
 }
 
-function turnRight(rover) {
+let turnRight = (rover) => {
   switch (rover.direction) {
     case "N":
       rover.direction = "E";
@@ -72,7 +72,7 @@ function turnRight(rover) {
 // Obstacle checking
 // ================================
 
-function checkObstacleFoward(rover) {
+let checkObstacleFoward = (rover) => {
   if (
     (rover.direction === "N" && board[rover.y - 1][rover.x] === "X") ||
     (rover.direction === "E" && board[rover.y][rover.x + 1] === "X") ||
@@ -84,7 +84,7 @@ function checkObstacleFoward(rover) {
   }
 }
 
-function checkObstacleBackward(rover) {
+let checkObstacleBackward = (rover) => {
   if (
     (rover.direction === "N" && board[rover.y + 1][rover.x] === "X") ||
     (rover.direction === "E" && board[rover.y][rover.x - 1] === "X") ||
@@ -99,7 +99,7 @@ function checkObstacleBackward(rover) {
 // Other rover in the way checking
 // ================================
 
-function checkOtherRoverInFront(rover, otherRover) {
+let checkOtherRoverInFront = (rover, otherRover) => {
   if (
     (rover.direction === "N" &&
       rover.y - 1 === otherRover.y &&
@@ -119,7 +119,7 @@ function checkOtherRoverInFront(rover, otherRover) {
   }
 }
 
-function checkOtherRoverBehind(rover, otherRover) {
+let checkOtherRoverBehind = (rover, otherRover) => {
   if (
     (rover.direction === "N" &&
       rover.y + 1 === otherRover.y &&
@@ -142,7 +142,7 @@ function checkOtherRoverBehind(rover, otherRover) {
 // Movements to outside the board checking
 // =======================================
 
-function checkInvalidForwardMovement(rover) {
+let checkInvalidForwardMovement = rover => {
   if (
     (rover.x === 0 && rover.direction === "W") ||
     (rover.x === 9 && rover.direction === "E") ||
@@ -154,7 +154,7 @@ function checkInvalidForwardMovement(rover) {
   }
 }
 
-function checkInvalidBackwardMovement(rover) {
+let checkInvalidBackwardMovement = (rover) => {
   if (
     (rover.x === 0 && rover.direction === "E") ||
     (rover.x === 9 && rover.direction === "W") ||
@@ -169,7 +169,7 @@ function checkInvalidBackwardMovement(rover) {
 // Movements
 // ================================
 
-function moveForward(rover, otherRover) {
+let moveForward = (rover, otherRover) => {
   if (
     checkInvalidForwardMovement(rover) ||
     checkObstacleFoward(rover) ||
@@ -196,7 +196,7 @@ function moveForward(rover, otherRover) {
   console.log("moveForward was called");
 }
 
-function moveBackward(rover, otherRover) {
+let moveBackward = (rover, otherRover) => {
   if (checkInvalidBackwardMovement(rover) || checkObstacleBackward(rover) || checkOtherRoverBehind(rover, otherRover)) {
     return;
   }
@@ -222,7 +222,7 @@ function moveBackward(rover, otherRover) {
 // Commands checking
 // ================================
 
-function command(rover, otherRover, orders) {
+let command = (rover, otherRover, orders) => {
   for (let i = 0; i < orders.length; i++) {
     let order = orders[i].toLowerCase();
     switch (order) {
