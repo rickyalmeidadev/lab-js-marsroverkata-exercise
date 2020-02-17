@@ -1,6 +1,7 @@
 // Rover object
 // ================================
 let marsRoverKata = {
+  name: "Kata",
   direction: "N",
   x: 0,
   y: 0,
@@ -8,6 +9,7 @@ let marsRoverKata = {
 };
 
 let marsRoverAlt = {
+  name: "Alt",
   direction: "S",
   x: 9,
   y: 9,
@@ -29,7 +31,7 @@ for (let i = 0; i < 10; i++) {
 }
 board[0][0] = "";
 board[9][9] = "";
-console.table(board);
+console.table(board); // <- Show grid and its obstacles
 
 // Turn sides
 // ================================
@@ -228,6 +230,7 @@ let moveBackward = (rover, otherRover) => {
 // ================================
 
 let command = (rover, otherRover, orders) => {
+  console.log(`${rover.name} calls:`);
   for (let i = 0; i < orders.length; i++) {
     let order = orders[i].toLowerCase();
     switch (order) {
@@ -247,6 +250,8 @@ let command = (rover, otherRover, orders) => {
         break;
     }
   }
+  console.log(`${rover.name} travel log:`);
+  console.log(rover.travelLog);
 };
 
 // Commands section
@@ -254,13 +259,8 @@ let command = (rover, otherRover, orders) => {
 
 // First rover
 // ================================
-console.log("Kata calls:");
-command(marsRoverKata, marsRoverAlt, "rffrfflfrff"); // <= Commands go here
-console.log("Kata travel log:");
-console.log(marsRoverKata.travelLog);
+command(marsRoverKata, marsRoverAlt, "rffrfflfrff"); // <- Commands go here
+
 // Second rover
 // ================================
-console.log("Alt calls:");
-command(marsRoverAlt, marsRoverKata, "rffrfflfrff"); // <= Commands go here
-console.log("Alt travel log:");
-console.log(marsRoverAlt.travelLog);
+command(marsRoverAlt, marsRoverKata, "rffrfflfrff"); // <- Commands go here
